@@ -1,5 +1,14 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from appdulceria.models import Usuario
+
+class FormularioLogin(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(FormularioLogin, self).__init__(*args,**kwargs)
+        self.fields['rut'].widget.attrs['class'] = 'form-control'
+        self.fields['rut'].widget.attrs['placeholder'] = 'Rut'
+        self.fields['contrasena'].widget.attrs['class'] = 'form-control'
+        self.fields['contrasena'].widget.attrs['placeholder'] = 'Contraseña'
 
 class UsuarioForm(forms.ModelForm):
     class Meta:

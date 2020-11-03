@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from appdulceria.forms import UsuarioForm, EditarForm, ContrasenaForm, RutForm
-from appdulceria.models import Usuario 
+from appdulceria.forms import UsuarioForm, EditarForm, ContrasenaForm
+from appdulceria.models import Usuario
 from appdulceria.filters import UsuarioFiltro
 
 def usuario(request):
@@ -44,7 +44,9 @@ def eliminar(request, rut):
     cli.delete()
     l_clientes = Usuario.objects.all()
     form = UsuarioForm()
-    return render(request,'gestion_usuarios.html',{'form':form,'clientes':l_clientes})
+    cli_filtro = UsuarioFiltro(request.GET, queryset=l_clientes)
+    l_clientes = cli_filtro.qs
+    return render(request,'gestion_usuarios.html',{'form':form,'clientes':l_clientes,'cli_filtro':cli_filtro})
 
 def editar_pass(request):
     cli_pass = Usuario(rut = request.POST['rut'])

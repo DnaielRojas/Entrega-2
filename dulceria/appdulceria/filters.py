@@ -1,5 +1,5 @@
 import django_filters
-from django_filters import DateFilter, CharFilter
+from django_filters import DateFilter
 
 from appdulceria.models import Usuario
 
