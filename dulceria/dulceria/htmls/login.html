@@ -50,7 +50,8 @@
         <div class="cont">
             <h1 class="etiq"><kbd>Inicio de Sesión</kbd></h1>
         </div>
-        <form action="login.html" method="POST">
+        <form method="POST">
+            {% csrf_token %}
             <div class="cont">
                 <div class="formulario">
                     <label class="etiq" for="rut">RUT:</label>
