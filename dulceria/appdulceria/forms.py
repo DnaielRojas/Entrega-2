@@ -1,19 +1,34 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from appdulceria.models import Usuario
+from appdulceria.models import Usuario, SolicitudDulces
 
-class FormularioLogin(AuthenticationForm):
+'''class FormularioLogin(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(FormularioLogin, self).__init__(*args,**kwargs)
         self.fields['rut'].widget.attrs['class'] = 'form-control'
         self.fields['rut'].widget.attrs['placeholder'] = 'Rut'
         self.fields['contrasena'].widget.attrs['class'] = 'form-control'
         self.fields['contrasena'].widget.attrs['placeholder'] = 'Contraseña'
+        '''
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = "__all__"
+
+class SolicitudForm(forms.ModelForm):
+    class Meta:
+        model = SolicitudDulces
+        fields = "__all__"
+        
+class EditarSolicitudForm(forms.ModelForm):
+    
+    class Meta:
+        model = SolicitudDulces
+        fields = '__all__'
+        exclude = ['id_solicitud']
+        
+                
 
 class EditarForm(forms.ModelForm):
     class Meta:

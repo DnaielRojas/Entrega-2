@@ -28,9 +28,15 @@ urlpatterns = [
     path('usuario/',appdulceria.views.usuario,name='usuario'),
     path('gestion_usuarios/',views.gestion_usuarios,name='gestion_usuarios'),
     path('editar/<rut>/',appdulceria.views.editar),
+    path('editar_solicitud/<id_solicitud>/',appdulceria.views.editar_solicitud),
     path('modificar/<rut>/',appdulceria.views.modificar),
+    path('modificar_solicitud/<id_solicitud>/',appdulceria.views.modificar_solicitud),
     path('editar_pass/',appdulceria.views.editar_pass),
     path('modificar_pass/<rut>/',appdulceria.views.modificar_pass),
     path('clientes/',appdulceria.views.clientes),
-    path('eliminar/<rut>/',appdulceria.views.eliminar)
+    path('lista_solicitudes/',appdulceria.views.lista_solicitudes),
+    path('eliminar/<rut>/',appdulceria.views.eliminar),
+    path('eliminar_solicitud/<id_solicitud>/',appdulceria.views.eliminar_solcitud),
+    path('solicitud/',views.solicitud),
+    path('solicitud_r/',appdulceria.views.solicitud_r)
 ]

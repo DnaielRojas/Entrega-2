@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dulcería Cachupín - Modificar Usuario</title>
+
+    <link rel="stylesheet" href="{% static 'CSS/estilo.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="shortcut icon" href="{% static 'Imgs/dulce2.png' %}">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="{% static 'JS/Funciones.js' %}"></script>
+
+
+        <script>
+          $(function() {
+          $(".exp").on("click", function() {
+
+              if ($(".item").hasClass("active")) {
+                  $(".item").removeClass("active");
+              }
+
+              else {
+                  $(".item").addClass("active");
+              }
+
+          });
+      });
+          </script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu">
+                <li class="exp"><a><span class="barra"></span></a></li>
+                <li class="logo"><a href="{% url 'inicio' %}">Dulcería Cachupín</a></li>
+                <li class="productos item"><a href="{% url 'productos' %}">Productos</a></li>
+                <li class="login item"><a href="{% url 'login' %}">Ingresar</a></li>
+                <li class="signup item"><a href="{% url 'registro' %}">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="fondo_gestion">
+        <div class="cont">
+            <h1 class="etiq"><kbd>Modificar Usuario</kbd></h1>
+        </div>
+        <form action="/modificar_solicitud/{{id_solicitud}}/" method="POST">
+            {% csrf_token %}
+            <div class="cont">
+                <div class="panel_blanco">
+                    
+                    <div class="col-sm-12">
+                        <h3>Id: <kbd>{{ id_solicitud }}</kbd></h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Rut: {{ form.rut }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Correo: {{ form.correo }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Nombre: {{ form.nombre }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Apellido Paterno: {{ form.apellido_paterno }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Descripción: {{ form.descripcion }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Dulce Especial del Dia: {{ form.dulce_dia }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Dirección: {{ form.direccion }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Entrega Inmediata: {{ form.entrega_inmediata }}</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <h3>Factura: {{ form.factura }}</h3>
+                    </div>
+                    <input class="col-sm-12 btn btn-primary btn-lg" type="submit" value="Confirmar">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <div class="col fondoa col-copyright">
+            <p class="copyright">© 2020 Dulceria Cachupin.</p>
+            <button class="btn-galleta btn btn-success" type="button" name="button" onclick="galleta()">Galleta de la fortuna</button>
+        </div>
+      </div>
+</body>
+</html>

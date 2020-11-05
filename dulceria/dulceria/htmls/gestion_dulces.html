@@ -57,47 +57,24 @@
             <div class="cont">
                 <h4 class="etiq"><kbd>Filtros de Busqueda</kbd></h4>
                 <div class="col-sm-12 panel_blanco">
-                    
-                    <div class="col-sm-4">
-                        <h5>Rut:</h5>
-                        {{ cli_filtro.form.rut }}
-                        <h5>NickName:</h5>
-                        {{ cli_filtro.form.nick }}
-                        <h5>Correo:</h5>
-                        {{ cli_filtro.form.correo }}
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Nombre:</h5>
-                        {{ cli_filtro.form.nombre }}
-                        <h5>Apellido Paterno:</h5>
-                        {{ cli_filtro.form.apellido_paterno }}
-                        <h5>Apellido Materno:</h5>
-                        {{ cli_filtro.form.apellido_materno }}
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Fecha Nacimiento (Inicio):</h5>
-                        {{ cli_filtro.form.fecha_n_inicio }}
-                        <h5>Fecha Nacimiento (Termino):</h5>
-                        {{ cli_filtro.form.fecha_n_termino }}
-                        <h5>Tipo De Usuario:</h5>
-                        {{ cli_filtro.form.tipoUsuario }}
-                    </div>
+                    {{sol_filtro.form}}
                     <input class="col-sm-12 btn btn-primary" type="submit" value="Buscar">
                 </div>
             </div>
         </form>
-            {% for cli in clientes %}
+            {% for sol in solicitudes %}
             <div class="cont">
                 <div class="col-sm-12 panel_blanco">
                     <div class="col-sm-12 info_usu">
                         <section class="col-sm-6">
-                            <h1><kbd>{{ cli.nick }}</kbd></h1>
-                            <h1>{{ cli.nombre }} {{ cli.apellido_paterno }} {{ cli.apellido_materno }}</h1>
-                            <h2>{{ cli.rut }}</h1>
+                            <h1><kbd>{{ sol.id_solicitud }}</kbd></h1>
+                            <h2>{{ sol.nombre }} {{ sol.apellido_paterno }}</h2>
+                            <h4><kbd>{{ sol.descripcion }}</kbd></h4>
+                            <h2>{{ sol.rut }}</h1>
                         </section>
                         <div class="col-sm-6 botones">
-                            <a class="col-sm-12 btn btn-primary space-btn" href="/editar_solicitud/{{cli.rut}}">Modificar</a>
-                            <a class="col-sm-12 btn btn-danger space-btn" href="/eliminar/{{cli.rut}}">Eliminar</a>
+                            <a class="col-sm-12 btn btn-primary space-btn" href="/editar_solicitud/{{sol.id_solicitud}}">Modificar</a>
+                            <a class="col-sm-12 btn btn-danger space-btn" href="/eliminar_solicitud/{{sol.id_solicitud}}">Eliminar</a>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,19 @@ class Usuario(models.Model):
     tipoUsuario = models.ForeignKey(TipoUsuario,on_delete=models.CASCADE,default=2)
     class Meta:
         db_table = "usuario"
+class SolicitudDulces(models.Model):
+    id_solicitud = models.AutoField(primary_key=True)
+    rut = models.CharField(max_length=10)
+    nombre = models.CharField(max_length=100,null=False)
+    apellido_paterno = models.CharField(max_length=100,null=False)
+    correo = models.EmailField(null=False)
+    descripcion = models.CharField(max_length=500,null=False)
+    dulce_dia = models.BooleanField()
+    direccion = models.CharField(max_length=150, null=False)
+    entrega_inmediata = models.BooleanField()
+    factura = models.BooleanField()
+    class Meta: 
+        db_table = "solicitud_dulces"
 class Producto(models.Model):
     id_producto = models.CharField(max_length=4,primary_key=True)
     nombre = models.CharField(max_length=100,null=False)

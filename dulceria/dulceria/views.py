@@ -21,3 +21,6 @@ def gestion_usuarios(request):
 
 def modificar_usuario(request):
     return render(request, 'modificar_usuario.html', {})
+
+def solicitud(request):
+    return render(request, 'solicitud.html', {})
