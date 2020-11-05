@@ -57,7 +57,30 @@
             <div class="cont">
                 <h4 class="etiq"><kbd>Filtros de Busqueda</kbd></h4>
                 <div class="col-sm-12 panel_blanco">
-                    {{sol_filtro.form}}
+                    <div class="col-sm-4">
+                        <h5>Rut:</h5>
+                        {{ sol_filtro.form.rut }}
+                        <h5>Correo:</h5>
+                        {{ sol_filtro.form.correo }}
+                        <h5>Nombre:</h5>
+                        {{ sol_filtro.form.nombre }}
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>Apellido Paterno:</h5>
+                        {{ sol_filtro.form.apellido_paterno }}
+                        <h5>Descripción:</h5>
+                        {{ sol_filtro.form.descripcion }}
+                        <h5>Direccion:</h5>
+                        {{ sol_filtro.form.direccion }}
+                    </div>
+                    <div class="col-sm-4">
+                        <h5>Entrega inmediata:</h5>
+                        {{ sol_filtro.form.entrega_inmediata }}
+                        <h5>Dulce del Dia:</h5>
+                        {{ sol_filtro.form.dulce_dia }}
+                        <h5>Factura:</h5>
+                        {{ sol_filtro.form.factura }}
+                    </div>
                     <input class="col-sm-12 btn btn-primary" type="submit" value="Buscar">
                 </div>
             </div>
