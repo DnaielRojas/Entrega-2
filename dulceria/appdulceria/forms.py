@@ -1,15 +1,19 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from appdulceria.models import Usuario, SolicitudDulces
 
-'''class FormularioLogin(AuthenticationForm):
+class CrearForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
+    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': '12345678-9'}))
+    password1 = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'placeholder': '********'}))
+    password2 = forms.CharField(strip=False,widget=forms.PasswordInput(attrs={'placeholder': '********'}))
     def __init__(self, *args, **kwargs):
-        super(FormularioLogin, self).__init__(*args,**kwargs)
-        self.fields['rut'].widget.attrs['class'] = 'form-control'
-        self.fields['rut'].widget.attrs['placeholder'] = 'Rut'
-        self.fields['contrasena'].widget.attrs['class'] = 'form-control'
-        self.fields['contrasena'].widget.attrs['placeholder'] = 'Contraseña'
-        '''
+        super(CrearForm, self).__init__(*args, **kwargs)
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None
 
 class UsuarioForm(forms.ModelForm):
     class Meta:
@@ -22,14 +26,11 @@ class SolicitudForm(forms.ModelForm):
         fields = "__all__"
         
 class EditarSolicitudForm(forms.ModelForm):
-    
     class Meta:
         model = SolicitudDulces
         fields = '__all__'
         exclude = ['id_solicitud']
         
-                
-
 class EditarForm(forms.ModelForm):
     class Meta:
         model = Usuario
@@ -39,13 +40,7 @@ class EditarForm(forms.ModelForm):
                 'nick',
                 'correo',
                 'fecha_nacimiento',
-                'contrasena',
                 'tipoUsuario']
-
-class ContrasenaForm(forms.ModelForm):
-    class Meta:
-        model = Usuario
-        fields = ['contrasena']
 
 class RutForm(forms.ModelForm):
     class Meta:

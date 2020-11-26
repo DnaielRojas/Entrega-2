@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class TipoUsuario(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -13,8 +14,8 @@ class Usuario(models.Model):
     nick = models.CharField(max_length=15,null=False)
     correo = models.EmailField(null=False)
     fecha_nacimiento = models.DateField(null=False)
-    contrasena = models.CharField(max_length=50,null=False)
     tipoUsuario = models.ForeignKey(TipoUsuario,on_delete=models.CASCADE,default=2)
+    django_user = models.OneToOneField(User, on_delete=models.CASCADE)
     class Meta:
         db_table = "usuario"
 class SolicitudDulces(models.Model):
@@ -28,7 +29,7 @@ class SolicitudDulces(models.Model):
     direccion = models.CharField(max_length=150, null=False)
     entrega_inmediata = models.BooleanField()
     factura = models.BooleanField()
-    class Meta: 
+    class Meta:
         db_table = "solicitud_dulces"
 class Producto(models.Model):
     id_producto = models.CharField(max_length=4,primary_key=True)

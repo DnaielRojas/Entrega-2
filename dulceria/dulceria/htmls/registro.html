@@ -41,7 +41,7 @@
                 <li class="exp"><a><span class="barra"></span></a></li>
                 <li class="logo"><a href="{% url 'inicio' %}">Dulceria Cachupín</a></li>
                 <li class="productos item"><a href="{% url 'productos' %}">Productos</a></li>
-                <li class="login item"><a href="{% url 'login' %}">Ingresar</a></li>
+                <li class="login item"><a href="/login">Ingresar</a></li>
                 <li class="signup item"><a href="{% url 'registro' %}">Registrarse</a></li>
             </ul>
         </nav>  
@@ -49,7 +49,7 @@
     <div class="fondor">
         <div class="cont">
             <h1 class="etiq"><kbd>Regístrate!</kbd></h1>
-            <form action="/usuario/" method="POST" onsubmit="return validarContras();">
+            <form method="POST">
                 {% csrf_token %}
                 <div class="formulario">
                     <label class="etiq" for="nombre">Nombre:</label>
@@ -62,7 +62,7 @@
                     <input class="col-sm-12 form-control" id="apellidoM" type="text" required name="apellidoM" placeholder="Ingrese su apellido materno"  pattern="[a-zA-Z- ]{1,100}">
 
                     <label class="etiq" for="rut">RUT:</label>
-                    <input class="col-sm-12 form-control" id="rut" type="text" required name="rut" placeholder="Rut"  oninput="validaRut(this)">
+                    {{formulario.username}}<br>
 
                     <label class="etiq" for="nick">Nickname:</label>
                     <input class="col-sm-12 form-control" id="nick" type="text" required name="nick" placeholder="Nick de usuario" pattern=".{5,15}">
@@ -73,12 +73,11 @@
                     <label class="etiq" for="fecha">Fecha de nacimiento:</label>
                     <input class="col-sm-12 form-control" id="fecha" type="date" required name="fecha">
 
-                    <label class="etiq" for="pw1">Contraseña:</label>
-                    <input class="col-sm-12 form-control" type="password" required id="pw1" name="contrasena" placeholder="Ingrese una contraseña" pattern=".{6,}">
+                    <label class="etiq" for="password1">Contraseña:</label>
+                    {{formulario.password1}}<br>
 
-                    <label class="etiq" for="pw2">Confirme la contraseña:</label>
-                    <input class="col-sm-12 form-control" type="password" required id="pw2" name="confcont" placeholder="Confirme su contraseña" pattern=".{6,}">
-
+                    <label class="etiq" for="password2">Confirme la contraseña:</label>
+                    {{formulario.password2}}<br>
                     <input class="col-sm-12 btn btn-primary btn-lg" type="submit" value="Registrarse">
                     <input class="col-sm-12 btn btn-danger btn-lg" type="reset" value="Borrar">
                     <a class="col-sm-12 btn btn-warning btn-lg" href="/clientes/">Clientes</a>

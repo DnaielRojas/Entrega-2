@@ -11,6 +11,12 @@ body{
     background-color: #fffee4;
 }
 
+nav{
+    background-color: #C41524;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
 header{
     background-color: #C41524;
     display: flex;

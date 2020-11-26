@@ -1,22 +1,62 @@
 from django.shortcuts import render, redirect
-from appdulceria.forms import UsuarioForm, EditarForm, ContrasenaForm, SolicitudForm, EditarSolicitudForm
-from appdulceria.models import Usuario, SolicitudDulces
+
+from django.contrib.auth import authenticate, logout as auth_logout
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+
+from django.contrib import messages
+
+from appdulceria.forms import UsuarioForm, EditarForm, SolicitudForm, EditarSolicitudForm, CrearForm
+from appdulceria.models import Usuario, SolicitudDulces, User
 from appdulceria.filters import UsuarioFiltro, SolicitudFiltro
 
-def usuario(request):
+def registro(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    formulario = CrearForm ()
     if request.method == "POST":
-        usuario_f = Usuario(rut = request.POST['rut'],
-                            nombre = request.POST['nombre'],
-                            apellido_paterno = request.POST['apellidoP'],
-                            apellido_materno = request.POST['apellidoM'],
-                            nick = request.POST['nick'],
-                            correo = request.POST['correo'],
-                            fecha_nacimiento = request.POST['fecha'],
-                            contrasena = request.POST['contrasena']
-                            )
-        usuario_f.save()
-        return redirect('/login')
-    return render(request,'registro.html')
+        formulario = CrearForm(request.POST)
+        filtroRut = Usuario.objects.filter(rut=request.POST['username']).first()
+        if filtroRut is not None:
+            messages.success(request,'Registro Incorrecto: Rut duplicado')
+            return redirect('/registro')
+        elif formulario.is_valid():
+            formulario.save()
+            usuario_f = Usuario(
+                rut = request.POST['username'],
+                nombre = request.POST['nombre'],
+                apellido_paterno = request.POST['apellidoP'],
+                apellido_materno = request.POST['apellidoM'],
+                nick = request.POST['nick'],
+                correo = request.POST['correo'],
+                fecha_nacimiento = request.POST['fecha'],
+                django_user=User.objects.latest('id'))
+            usuario_f.save()
+            messages.success(request,'Registro Exitoso')
+            return redirect('/login')
+        else:
+            messages.success(request,'Registro Incorrecto: Error de formulario')
+            return redirect('/registro')
+    return render(request,'registro.html',{'formulario':formulario})
+
+def login(request):
+    if request.user.is_authenticated:
+        return redirect('/')
+    if request.method == 'POST':
+        usuario = authenticate(request, username=request.POST['rut'], password=request.POST['pw'])
+        if usuario is not None:
+            auth_login(request, usuario)
+            return redirect('/')
+        else:
+            messages.success(request, 'Ingreso incorrecto: Rut o contraseña incorrectos')
+            return redirect('/login')
+    return render(request, 'login.html', {})
+
+@login_required(login_url='/')
+def logout(request):
+    auth_logout(request)
+    return redirect('/login')
 
 def solicitud_r(request):
     if request.method == "POST":
@@ -110,23 +150,18 @@ def eliminar_solcitud(request, id_solicitud):
     l_solicitudes = sol_filtro.qs
     return render(request,'gestion_dulces.html',{'form':form,'solicitudes':l_solicitudes,'sol_filtro':sol_filtro})
 
-def editar_pass(request):
-    cli_pass = Usuario(rut = request.POST['rut'])
-    cli = Usuario.objects.get(rut=cli_pass.rut)
-    form = ContrasenaForm(instance=cli)
-    return render(request,'cambiar_pass.html',{'form':form,'cli':cli})
-
+'''
 def modificar_pass(request,rut):
     cli = Usuario.objects.get(rut=rut)
     if request.method == "POST":
-        form = ContrasenaForm(request.POST, instance=cli)
+        form = aaaaaa(request.POST, instance=cli)
         if form.is_valid():
             try:
                 form.save()
                 redirect('/login')
             except:
                 pass
-    return render(request,'login.html')
+    return render(request,'login.html')'''
 
 def clientes(request):
     form = UsuarioForm()

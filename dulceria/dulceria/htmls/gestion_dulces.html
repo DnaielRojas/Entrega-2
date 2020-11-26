@@ -1,53 +1,9 @@
+{% extends 'base.html' %}
+{% block titulo %} Bienvenido a espacioadmin {% endblock titulo %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
 
-    <title>Dulcería Cachupín - Gestión de Usuarios</title>
-
-    <link rel="stylesheet" href="{% static 'CSS/estilo.css' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <link rel="shortcut icon" href="{% static 'Imgs/dulce2.png' %}">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="{% static 'JS/Funciones.js' %}"></script>
-
-
-        <script>
-          $(function() {
-          $(".exp").on("click", function() {
-
-              if ($(".item").hasClass("active")) {
-                  $(".item").removeClass("active");
-              }
-
-              else {
-                  $(".item").addClass("active");
-              }
-
-          });
-      });
-          </script>
-
-</head>
+{% block contenido%}
 <body>
-    <header>
-        <nav>
-            <ul class="menu">
-                <li class="exp"><a><span class="barra"></span></a></li>
-                <li class="logo"><a href="{% url 'inicio' %}">Dulcería Cachupín</a></li>
-                <li class="productos item"><a href="{% url 'productos' %}">Productos</a></li>
-                <li class="login item"><a href="{% url 'login' %}">Ingresar</a></li>
-                <li class="signup item"><a href="{% url 'registro' %}">Registrarse</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <div class="fondo_gestion">
         <div class="cont">
@@ -104,12 +60,6 @@
             </div>
             {% endfor %}
     </div>
-
-    <div>
-        <div class="col fondoa col-copyright">
-            <p class="copyright">© 2020 Dulceria Cachupin.</p>
-            <button class="btn-galleta btn btn-success" type="button" name="button" onclick="galleta()">Galleta de la fortuna</button>
-        </div>
-      </div>
 </body>
 </html>
+{% endblock contenido%}
